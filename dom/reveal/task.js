@@ -6,7 +6,6 @@ for (let i = 0; i < elementsScroll.length; i++) {
   function printShowElements() {
     let viewportHeight = window.innerHeight;
     let elementTop = elementsScroll.item(i).getBoundingClientRect().top;
-    
     if (elementTop < viewportHeight / 2) {
       elementsScroll.item(i).className = 'reveal reveal_active';
     }
