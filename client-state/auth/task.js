@@ -47,14 +47,14 @@ form.addEventListener('submit', (event) => {
   xhr.send(formData);
   console.log(xhr);
   xhr.addEventListener('readystatechange', function() {
-      if (this.readyState == xhr.DONE && this.status == 200 && this.response.success === true && this.response.hasOwnProperty('user_id')) {
+      if (this.readyState == xhr.DONE && this.status == 200 && this.response.success && this.response.hasOwnProperty('user_id')) {
         elemSignin.classList.remove('signin_active');
         elemWelcome.classList.add('welcome_active');
         saveValue(this.response.user_id);
         elemUserId.textContent = this.response.user_id;
         elemWelcome.insertAdjacentHTML('afterend', elemButtonNew);
         document.querySelector('.button').addEventListener('click', getSignOut);
-      } else if (this.readyState == xhr.DONE && this.status == 200 && this.response.success === false) {
+      } else if (this.readyState == xhr.DONE && this.status == 200 && !this.response.success) {
         alert('Неверный логин/пароль');
       }
   });

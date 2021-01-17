@@ -1,22 +1,18 @@
 const elemEditor = document.querySelector('#editor');
 
 function saveValue(value) {
-  localStorage.editorValue = JSON.stringify(value);
+  localStorage.editorValue = value;
 }
 
 function getValue() {
-  try {
-    return JSON.parse(localStorage.editorValue);
-  } catch (e) {
-      return null;
-    }
+  return localStorage.getItem('editorValue');
 }
 
 if (localStorage.hasOwnProperty('editorValue')) {
     elemEditor.value = getValue();
 }
 
-elemEditor.addEventListener('change', () => {
+elemEditor.addEventListener('input', () => {
   saveValue(elemEditor.value);
 });
 
@@ -29,5 +25,5 @@ const elemButtonNew = `
 elemEditor.insertAdjacentHTML('afterend', elemButtonNew);
 const elemButton = document.querySelector('.button').addEventListener('click', () => {
   elemEditor.value = '';
-  localStorage.clear();
+  localStorage.removeItem('editorValue');
 });
